@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <!-- PWA Core -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1a3a5c">
+
+  <!-- Apple PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Edna WGS">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAE/0lEQVR42u3dzXEUMRTEcUXBwaFQhEIWJEcIhMGJDDhwwyeXq9br1Wj18br7/2qOlMs7+uHRSHrbrVEU1VN///ziJsTVt5+/P7xeNXx+vf6bfz++3F7cUkMNnSZurw+JYMUExDCLfiJAqVUvX79vMDGm5PV3Y4DOmDjFYoAISvaZ6GGx1MSAkrffnEEMYgERDRY919tPG7t6niMQ2WdiFovnZUz08Z4ISkxk4KMKi5oy1vmASC+LyjKW+oDIAxZ1ZqA756cQ6ZUBjmgfD289OEKJ9Nz62DlHro9LA5D2thJNZGAYQtY50n0MD4b9Cmm0jymj4re38syFjEJE6rDw8bHoTWEnkYIsHHwsXWPYQKQyC20fq2/Kuunq8SmnuY9t92W6EiETkj6O3J3pf0hUWCj5OHuDjiip85GRUeVxU/PDIkN4GS3RR+Wbdfuf/mFDg7oSZDy7eNXZZS+qBBmDK1cDDUuKSpCxnIU0kXQcG0zoKsmVcYSFHJE4GWdNDCgJ8gELOSLmOCrslOouo9nKKLWHXrxh4qSPcBn4KISj7LkbUR/I2LR9ig/5BwrbvDt8gAMcvLvyZhuDgznHWhzFd094Wznpo/7uGuscZ3CobMqzQrrbh9xZHvZW9vlQPBm6iIjryXXDM+U7iXg3NNj2oawmQp+LMI5F01WnKecSHCofbK6SKBPjPhQ/4TCRtD8VT+HQ/ZBXO97CTYz48Pi0l3plY02k40h7+1iII9PEwyYDle/nWOsj2UR/lr2lEn8ci5KI638n2HIcsAgn4oajcpY9OLJYeBNxwKGbZa+KAxYQueuDJSyDbok4HCQ1gUPmQK+3D2Tg44oPZOAjDkd4Ny84wAEOcBzBwWyUOcddH6xwIEMPB+sc4GCFFBzsrShuv3GCHBYOOPYTSWMhj2MPkUwWJjgWTVdDppwROOYqCTdhi2PuH5JYFs449isxb511bQ5e+rjxvmkRMq6eXI/tsg/1EZhlz2Pl2cUr7yx7cAyuXIVk2YNjOYtMIiY4yLIHRxUWIUSEcZBlDw4BFq5ExHCQtwKO6sc2Q773WAMHGW/gEDvqbe+jOg5yZemIFD7CmRL8Bg5wgAMc4GDO4Y2Dt5UqOPCBjLsyWO1AhiQO9lbAUZpI4pZbcgo1LC7IkDv1Q5Y9OHZPV5PDiG0z3siyX4vDoE2BLPtVMpwanDABjjm9suSWv8QmltNlP0eGHw6y7MExwURyln3rr3ATaUHl7VLBgpTyiHRqsuwny5DAQZb9MRzSIT0Ela+VIRr8RpZ9Ig7yVmrhKOKDpKaKMir4IOOtroyzOEiHrI7jlA9yZQVkSOMI7+bdgeOID3BoyAAHOGr5YM4hIwMfyPB8uLDOsQMHPpDBmy3vrqlrpoFbbm1n5ezQso0iuWFLln1RGcYb+mzK++CYq4SzPLY+XsiyryOj8jnk8Cz7VqfUOxjMsuxbtaLLHhl6PqKy7Fvl0vpmH7Pk2Fa/6n8nmGW+cFMpJxYSRJpWOZkorqQpliWLakSabp1iERJU3tTLm8VBIs2jbPoA6pxWbGblcWzz+IHW5loeB3oP+mje5XHU+4iPFlIGTQA7fbS0MjjZuwdHiy1wwGLERzgOYHxGJHbOAYYuImlvKwC4RiRknYNBd/CBjIpK/PZWGFwTIrCACCxclAhl2TNkZ5RUzrJngKpUkSx7BsIKCiCwMtMEtzSuGPX39R85q/RhImRrJgAAAABJRU5ErkJggg==">
+  <link rel="apple-touch-icon" sizes="152x152" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJgAAACYCAIAAACXoLd2AAAEa0lEQVR42u3dy3HcMBAE0InCB4XicijKQsk5BIXhkzLQQTftyVX6YUlwMOju6SmepSVeYRcEh80Il4ulXl+ePQjo9efvv6/HTW58vD39+np4MPfLHfQ7KGrXVfXw+3HgN0d4kPN23P67CaD9LCpIaM5kv72Epzgt+iPhXcXB8f8vnD3GYHctzZlGeEXxoqU5PxDuVUy0bMf5aRC3K+ZatuD8dgT1IMU5fxpBVUhBy/EICkNKcR4ZRJnFjqblqaFkv/yQ5ZwY0C2WZYqUllfmR6VlJSGf5fVfrIKpWTwR+SwTl5GLZudGPxrL3FPNnaB7pyCN5aJTzeJEIwTlLDjbYtHiM+qouFR047m0hjwo+vryPOZEOAUrfljFDFpDyvZs+Sxx/D4d49YeZNFGiuNFyqn2KkxRfcUsv1Oiypa8U5BogkoplhFicipAbiFE4+RWLN4RBekyKbVEVgS8x4JrqTQRiaYm2XREuDsBOy/1FUEgaSwNqQCpt1JtuoJFuHBs/huZAAmyidN51ZpjCbWt2vM6MgES8C5Vt52dHEvMm8ZZnHSEk5BoPRyJnKSEk5YInzidk53wNCTOh85aCgn4zVhifvoJTo0pqAl5sItO0u8cJMWZSPa1JlvSnZJGp3kypJjfoBkH7dmPZEtVv7nwR0Pi+imJ8ikWJLiSctJA1ifwcnGiQ24PUWaZoNCQ8jk7ayGpCYmSr5Zb9lQUsMSClE+HbAEpn9dqSEOehGz+varz7WpIQ3qxg7RwbXsRqXYpybI5h/luLENunprsExEdsoBThpAAchGnGCENZJaopB8l5HVOSUJWyBpR4tZIxsbOiV6CsSjvINArHu/uUeox17QcP/VBlJ3c9Kv1Ynyk7HMgTfxURZkglya4snMSQBYn8JKKQkNuDFGm4wSFLNtOk3mwWSrDg+gOqDjkxn1tneSdzooClgRvuXJeqyFbQspHCApD9sqCNKQXO1Tfq80XriJL1uaXkoLxrQ03d9i3dRqF7WpvtNLk7EBFYUPf96BIvkqZoJIhrvrZyd1zlAU6d5yjzNdON/aT758TTFAeT0HJjlbBKOyDTw2MHwIRhJTPUR4/x6Oj2CdHWTA7mQJyXYIrHSflW5XKQni5w3aRIbfkKPMFtCJbFlzLi2RBwkIWb8fQcXK8nZcuwoxDsRLSoYJrIcssqWM+CRRrIJ3XWgFZYGnICkVD6kAiW3b4jYzc8qp1C2Skl68jWdc4HVaw+itV0stKpb3WWFoC+64s+6uxuni30Ym2yKOmuG6MPLC9EyIqi/FWJcVNx6gvd9EpKNJ1hOD3tcbecqe5giJgHAjpsx+BUFBPYzFmeQZOsfgBigZgcRFu5wzkKiOsj09upJhlKZ/qESzlnB0FxWnLDslXwVjOolNQPMUpnw4ZGkVxs36dZYhVQ8hQrVaQIV/ykNGqJBc70bZkLj/ClcK5sb3dfN9zEr2tzmT3RZdyXiQ00H5OE3KL2g+uynKwPdT7XefaADyY6HWTkz/Hd92YDJD94ytNAAAAAElFTkSuQmCC">
+  <link rel="apple-touch-icon" sizes="120x120" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAIAAAC2BqGFAAADOElEQVR42u3dwU3EMBSEYVfBgVIQpWwXNEcJlMGJDjhwY6W9RNpN1nHi9+Yf+ylXRPLJsr2Jxy5l1qy1+v35mgjn1Pvn9/K6ym5ffx8vy2sC1spW+j4Vn+5bvm3ET7lHFH99u3QiruG+/vehideu65/UXGusw3HfOHoQN3Pf/sSNOEC52RrPvXz+Tj3GKX0ImPv++WOUjzRqHvfDh0e0aIz1NoFyH03irlEQnHXArOstdObRlRePuBN3P2Ih7oPTg4PcMcT51gfv+0jfHembbH3i3Tc38EjiHOseD9AsHuObYN37MbJ+T2pZxzzGfSN9+LY6VxysvNbVPn3HnyXOg27zrRSHQUs1YZ0Grq7ciTiFW1S508+5sNewHa2zlEHTwbGUwdb6PYZUHzJQc0Y2asQY6DAqhk3pPProRujgH9n0WUe7dfwLDfQ8uhE65f1cM7cO8W7rsLe6B7kFiXdAR74+b+67ZT8I7LBOua1KbtkmvBs68c5qvrDo+9Zai9zidi8c/4LfFroy4ZL1FfwoNMV3Vy5I0VqwizgliTWhL8E5QwloD2JB7jRo3PpoJDRuxT8SGpdhQUKzUlm9oM3Wheo2au4YiBgV3UZCwHhos7BcfYYnu4jfYB6dBg3NGVKhiTlDMDQuZ4iHBuUMHaApOcNGaLXbsvlmCLBG5AzBXQcuZ8iDhuYMMdAGOUN1aKecoSi0/fpoCegRVvznQ4+QYcmHHiSVBYM227dGYtMT+xatHhDybM4246H0SMhKYuHm0cmrSb1zhlord41zhror/v1yhqLQfjlD9bzQzBnOb4YzZ4jLGWqG4KA5Q9HQvV/OUGsnCdecodDGKN45Q4ndfuzXR0tsXjXCiv/8HdlGyLDkbzA4SCqLd6QNMWfIOzsI2qKp5zSN0pyJ1uwztOY8Ogg6faonnjM0PO5N8Ncg7GQhaM5wiNP1FHKG+NPfEDlD//MMFb4ZmpwdKZ4zxJ+GisgZss/3peQMqSdWs3KGyDPYcTnDIlLG66OLWlmu+C+aZZZhKeJlkMoqlELnDAuucC26oAvRRxebkp11FMuSmkcX+0rPGZbRKjhnWGZ1zRlO3t3uUza0iJT/9G+QI/P2v4kAAAAASUVORK5CYII=">
+  <meta name="msapplication-TileColor" content="#1a3a5c">
+  <meta name="msapplication-TileImage" content="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAFeklEQVR42u3dy60UMRCFYUfBglAQoZAFyRECYbAiAxbsGIkN0h1dPH7WOecveYnQ7e5P3R67qtwaQRD74tfP79wE4kl8/vbj6XiIeX88/s3vrx/eDm5pIpd+N2/HU0aQCkIz5mZAEphk4uOnLz1uVtF5ldFjPP5CHlNFN510lrsZk/T3D+bBlXBTh84YIyRBB0ZqburTGWaEpBJ0Ose//+3w6Jw+w+g+nYJ6thqCkT8dGAnQkdCz2xCMxvUACEPjdIT0nDEEoxfoAOidAZsuPQDC0Dgd5kA9Az0AmgIUZ2js2SSvA8FoVk/sSjSGVuqJ2gvD0BY9pRhVo+NsaNO04xajsnQMDR1YejnJqD4dK0YH7tExRlp0HAydvE1bGYnS0TZ05U5tkiTqRtjQ9ftVRFKp+4AeJUY1bwJ6qkuqf/nosVqKxJCenrevjZ6aMjNJANqy7dDZH8hAEnoW0xmoN1VnhJ47bpwkoWd8w2F5Abzopw09F145Zi8k9FSho8soF1BBOoqMEvUUpyPHKEhPteQKmxXtCEA1U3M8DJnrqZ/VZcAIPZcTLTAEIACh52qeF4YABCB+eQGolCGVLVLmQEUNAQhA8pumrAOpGlJM92Elugog0VRD9sKqGJLOdN7NKKEwyLxS5xajqJqyxFKvfYwCyxEjykwPMIqtZB00JHeR+xgl04kDtFASbsYBqV/wjCTcLDDkdOUv1cZDZwEgv4sf6M6Bm3FD3neBqTGATrjpqe1S7FC2HRBu/lslqNsj8YShTDoD9aaZjIIAbXITLslfz6pP1Q5GHpJsAV1xE/hCMgRUhE4IIytABenYMwpqE16kP5AfI21AnJkKILf9hzRDkoA4N740IPRgaMoQgABkC0gr7yLEEIAABCAAAYg5kMMciOUfAE0ZYgkRPf6AWIkGEHthpluqFOVAJw7QXUbhdHwAnWcEHUNAZxhBxxzQPkbQCQK0QxJuEgFVkJRSKp/QWeIwo4RbGtfP5YCkqDuZqGegMIj+QBj6z6/x4f5A4ZKyPmGdPRJ7+gMhKQtQD52BelMYmQPa5AZJ5oA6V2iWF8BHd47mlXNYEoCgAyMLQAXp5DDSBlScTgIjVUCcmQogtwz2TENigDg3HkD+pTO5h/ECCEC2zRW0UpJDDAEIQAACEICYAzEHAhCAMISeST0sJ0InAhB7YQDyYcQ2qvx5YbcYJZ85b3hi4UlGyXRsAZ1hBB1zQPsYQacXkFOJzzwg3Lysx7LIEDcAOlcbD51ZQIGl8rhZqSen2wv9gQC0cfm4p7YrtylioKExN0+rBDN7JLaXIvBT9erI7QodYmiTm0xJbSDCP1U7GOlKigB0xU3IC6mNBXRgNK7H5jDei41d3A7XdTJUnI4NozYZutNkzkwtAaiaIU5tFtNTBxDnxqsCqmBIZcPcyVBbGAACkLAhrXwdD0NtRwAoBFDbFAACEIaYA93TAyAAYYh1oKt6+EXGLy/5ZSH2wuQBsbTIsqHJHtktRmbbXu1KZG7RW268t1sRlelBzoa/oU2MjFPGWoWQru/pGZaphlX01E+/vyjJNlU+zdB5Rs6FFpmAzkjyL/XCEP2BWuWw6VA2cPa73kGnGFq7dtzZH0hXUlMJOToD9aZyjJpWuLoRldQUo6ybVXRUPm1NNyxfOVovpKYeOXQKMmo2kUOnCKPmF1F07jJqrmGZg1wtR7t5h2UGex1DLSFcM9ivM2pRYZnEfstQywwALQHUwsOsEOKkoUb0GAIQeqYYAQg6s4yYA0FnyhCA0DPLKHkdCAzmjKCjxChkL4yH7s8IOvKSbjHaQYfHGsEIOraSdjNaTocHV1HSDkZr6fCYNGIe0EI3PI4gTKAhBknBhVgcyHg//gDd5960+OUr3gAAAABJRU5ErkJggg==">
+
+  <!-- SEO -->
+  <meta name="description" content="NYCRD 유전체 팀과의 전장 유전체 분석 방문을 준비하세요.">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>Edna – WGS 사전 유전 상담</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:   #1a3a5c;
+      --blue:   #2d4a8a;
+      --teal:   #3cb8e0;
+      --orange: #f97316;
+      --cream:  #fef9f0;
+      --white:  #ffffff;
+      --pale-blue: #e8f4fb;
+      --pale-q:    #f3e5f5;
+      --pale-ok:   #e8f5e9;
+      --pale-warn: #fff3e0;
+      --text:   #1a3a5c;
+      --mid:    #4a6080;
+      --soft:   #8a9bb0;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html,body { width:100%; height:100%; overflow:hidden; background:var(--navy); }
+    body { font-family:'Quicksand',sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; min-height:-webkit-fill-available; }
+
+    @media (display-mode:standalone){
+      body { background:var(--cream); }
+      .phone { width:100vw; height:100vh; height:-webkit-fill-available; border-radius:0; box-shadow:none; }
+      .notch { display:none; }
+      .status-bar { padding-top:env(safe-area-inset-top,44px); height:calc(env(safe-area-inset-top,44px)+28px); }
+      .response-area { padding-bottom:calc(20px + env(safe-area-inset-bottom,20px)); }
+    }
+
+    /* Phone shell */
+    .phone { width:390px; height:844px; background:var(--cream); border-radius:54px;
+      box-shadow:0 0 0 2px #333,0 0 0 6px #555,0 0 60px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.1);
+      position:relative; overflow:hidden; display:flex; flex-direction:column; }
+    .notch { position:absolute; top:0; left:50%; transform:translateX(-50%); width:126px; height:34px; background:#111; border-radius:0 0 20px 20px; z-index:100; }
+
+    .status-bar { height:50px; display:flex; align-items:flex-end; justify-content:space-between; padding:0 28px 6px; flex-shrink:0; z-index:10; }
+    .status-time { font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; color:var(--text); }
+    .status-icons svg { width:16px; height:16px; fill:var(--text); }
+    .status-icons { display:flex; gap:6px; align-items:center; }
+
+    /* Header */
+    .app-header { background:linear-gradient(180deg,#2d4a8a 0%,#1a3a5c 100%); padding:10px 24px 14px; text-align:center; flex-shrink:0; position:relative; }
+    .app-header::after { content:''; position:absolute; bottom:0; left:0; right:0; height:20px; background:var(--cream); border-radius:20px 20px 0 0; }
+    .app-title { font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; color:rgba(255,255,255,.8); letter-spacing:.1em; text-transform:uppercase; }
+    .app-subtitle { font-family:'Nunito',sans-serif; font-size:10px; color:rgba(255,255,255,.55); margin-top:2px; }
+    .progress-wrap { margin-top:8px; height:5px; background:rgba(255,255,255,.15); border-radius:4px; overflow:hidden; }
+    .progress-fill { height:100%; background:var(--orange); border-radius:4px; transition:width .6s ease; width:5%; }
+
+    /* Section badge */
+    .section-badge { display:inline-block; font-family:'Nunito',sans-serif; font-size:10px; font-weight:800; padding:3px 10px; border-radius:20px; margin:6px auto 2px; letter-spacing:.06em; text-transform:uppercase; }
+    .badge-info  { background:var(--pale-blue); color:var(--blue); }
+    .badge-quiz  { background:var(--pale-q); color:#6a0dad; }
+    .badge-good  { background:var(--pale-ok); color:#1b5e20; }
+    .badge-warn  { background:var(--pale-warn); color:#7a3800; }
+
+    /* Chat */
+    .chat-area { flex:1; overflow-y:auto; padding:12px 18px 8px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; }
+    .chat-area::-webkit-scrollbar { display:none; }
+
+    /* Owl hero */
+    .owl-scene { display:flex; flex-direction:column; align-items:center; padding:6px 0 2px; animation:float 4s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+
+    /* Bubbles */
+    .bubble-row { display:flex; gap:9px; align-items:flex-end; animation:slideUp .35s ease forwards; opacity:0; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+    .bubble-row.edna-row { flex-direction:row; }
+    .bubble-row.patient-row { flex-direction:row-reverse; }
+
+    .avatar { width:34px; height:34px; border-radius:50%; flex-shrink:0; overflow:hidden; background:#2d4a8a; display:flex; align-items:center; justify-content:center; }
+
+    .bubble { max-width:265px; padding:11px 15px; border-radius:18px; font-size:15px; line-height:1.55; font-weight:600; color:var(--text); position:relative; }
+    .edna-bubble { background:var(--white); border-bottom-left-radius:4px; box-shadow:0 2px 10px rgba(26,58,92,.1); }
+    .patient-bubble { background:linear-gradient(135deg,#2d4a8a,#1a3a5c); color:white; border-bottom-right-radius:4px; box-shadow:0 2px 10px rgba(45,74,138,.25); }
+    .quiz-bubble { background:var(--pale-q); border-bottom-left-radius:4px; box-shadow:0 2px 10px rgba(26,58,92,.1); }
+
+    /* Typing */
+    .typing-row { display:flex; gap:9px; align-items:flex-end; animation:slideUp .35s ease forwards; opacity:0; }
+    .typing-dots { background:var(--white); border-radius:18px; border-bottom-left-radius:4px; padding:13px 16px; display:flex; gap:5px; align-items:center; box-shadow:0 2px 10px rgba(26,58,92,.1); }
+    .dot { width:7px; height:7px; background:#bbc8d8; border-radius:50%; animation:bounce 1.2s ease-in-out infinite; }
+    .dot:nth-child(2){animation-delay:.2s}
+    .dot:nth-child(3){animation-delay:.4s}
+    @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px);background:var(--teal)} }
+
+    /* Response area */
+    .response-area { padding:10px 18px 26px; display:flex; flex-direction:column; gap:9px; flex-shrink:0; background:var(--cream); }
+
+    .resp-btn { width:100%; padding:13px 18px; border:2px solid transparent; border-radius:14px; font-family:'Quicksand',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; text-align:left; display:flex; align-items:center; gap:11px; line-height:1.35; }
+    .resp-btn.primary { background:linear-gradient(135deg,#2d4a8a,#1a3a5c); color:white; box-shadow:0 4px 14px rgba(45,74,138,.25); }
+    .resp-btn.primary:active { transform:scale(.97); }
+    .resp-btn.secondary { background:var(--white); color:var(--text); border-color:#d8e4f0; box-shadow:0 2px 8px rgba(26,58,92,.06); }
+    .resp-btn.secondary:active { background:#f0f5fb; transform:scale(.97); }
+    .resp-btn.quiz-opt { background:var(--white); color:var(--text); border-color:#ce93d8; box-shadow:0 2px 8px rgba(106,13,173,.08); }
+    .resp-btn.quiz-opt:active { background:var(--pale-q); transform:scale(.97); }
+    .btn-icon { font-size:20px; flex-shrink:0; }
+    .btn-text .btn-title { font-weight:700; font-size:14px; }
+    .btn-text .btn-sub { font-size:11px; font-weight:500; opacity:.7; margin-top:1px; }
+
+    /* Quiz feedback banners */
+    .feedback-banner { border-radius:12px; padding:12px 15px; font-size:14px; font-weight:600; line-height:1.45; animation:slideUp .35s ease forwards; opacity:0; }
+    .feedback-correct { background:var(--pale-ok); color:#1b5e20; border:1.5px solid #a5d6a7; }
+    .feedback-wrong   { background:var(--pale-warn); color:#7a3800; border:1.5px solid #ffcc80; }
+
+    /* Offline toast */
+    #offlineToast { display:none; position:absolute; top:58px; left:50%; transform:translateX(-50%); background:var(--orange); color:white; padding:7px 16px; border-radius:18px; font-size:12px; font-weight:700; z-index:300; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,.2); }
+
+    /* Install banner */
+    #installBanner { display:none; position:absolute; bottom:0; left:0; right:0; background:linear-gradient(135deg,#2d4a8a,#1a3a5c); color:white; padding:12px 18px; align-items:center; gap:10px; z-index:200; font-family:'Quicksand',sans-serif; }
+    #installBanner .install-text { flex:1; font-size:12px; font-weight:600; line-height:1.4; }
+    #installBanner .install-btn { background:var(--orange); color:white; border:none; border-radius:9px; padding:7px 14px; font-weight:800; font-size:12px; cursor:pointer; font-family:'Quicksand',sans-serif; }
+    #installBanner .install-close { background:none; border:none; color:rgba(255,255,255,.6); font-size:18px; cursor:pointer; line-height:1; }
+
+    @keyframes blink { 0%,93%,100%{transform:scaleY(1)} 95%{transform:scaleY(.05)} }
+    #owl-eyes { animation:blink 3.8s ease-in-out infinite; transform-origin:center 70px; }
+    @keyframes wingFlap { 0%,85%,100%{transform:rotate(0deg)} 90%{transform:rotate(-16deg)} 95%{transform:rotate(3deg)} }
+    #owl-wl { transform-origin:65px 95px; animation:wingFlap 4.5s ease-in-out infinite; }
+    #owl-wr { transform-origin:65px 95px; animation:wingFlap 4.5s ease-in-out 0.18s infinite; transform:scaleX(-1); }
+  </style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="notch"></div>
+  <div id="offlineToast">📵 오프라인 — 앱은 계속 작동합니다!</div>
+
+  <div class="status-bar">
+    <span class="status-time" id="statusTime">9:41</span>
+    <div class="status-icons">
+      <svg viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" fill="none"/><path d="M22 11v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </div>
+  </div>
+
+  <div class="app-header">
+    <div class="app-title">WGS 사전 유전 상담</div>
+    <div class="app-subtitle">뉴욕 희귀질환센터 제공 자료</div>
+    <div class="progress-wrap"><div class="progress-fill" id="progressBar"></div></div>
+  </div>
+
+  <div class="chat-area" id="chatArea">
+    <!-- Owl hero -->
+    <div class="owl-scene">
+      <svg width="120" height="135" viewBox="0 0 130 155" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="65" cy="150" rx="52" ry="7" fill="#1a2744" opacity=".25"/>
+        <!-- Body -->
+        <ellipse cx="65" cy="100" rx="38" ry="42" fill="#f97316"/>
+        <ellipse cx="65" cy="112" rx="27" ry="29" fill="#ffe0c0"/>
+        <!-- Wings: left tilts -8 deg, right mirrors at x=65 tilting +8 deg -->
+        <g id="owl-wl"><ellipse cx="33" cy="105" rx="14" ry="26" fill="#d96010" transform="rotate(-8 33 105)"/></g>
+        <g id="owl-wr"><ellipse cx="97" cy="105" rx="14" ry="26" fill="#d96010" transform="rotate(8 97 105)"/></g>
+        <!-- Ear tufts -->
+        <polygon points="45,62 40,44 52,58" fill="#f97316"/>
+        <polygon points="85,62 90,44 78,58" fill="#f97316"/>
+        <!-- Head -->
+        <circle cx="65" cy="72" r="32" fill="#f97316"/>
+        <ellipse cx="65" cy="76" rx="24" ry="22" fill="#ffe0c0"/>
+        <!-- Eyes -->
+        <g id="owl-eyes">
+          <circle cx="53" cy="70" r="12" fill="#1a3a5c"/>
+          <circle cx="77" cy="70" r="12" fill="#1a3a5c"/>
+          <circle cx="53" cy="70" r="9"  fill="#3cb8e0"/>
+          <circle cx="77" cy="70" r="9"  fill="#3cb8e0"/>
+          <circle cx="53" cy="70" r="5"  fill="#0d1f35"/>
+          <circle cx="77" cy="70" r="5"  fill="#0d1f35"/>
+          <circle cx="56" cy="67" r="2.5" fill="white" opacity=".9"/>
+          <circle cx="80" cy="67" r="2.5" fill="white" opacity=".9"/>
+        </g>
+        <!-- Beak: inverted triangle, point at bottom, elongated -->
+        <polygon points="59,78 71,78 65,93" fill="#e07010"/>
+        <line x1="65" y1="78" x2="65" y2="93" stroke="#c05808" stroke-width="1" opacity=".5"/>
+        <!-- Chest feathers -->
+        <ellipse cx="55" cy="112" rx="8" ry="5" fill="#ffd4a0" opacity=".6" transform="rotate(-15 55 112)"/>
+        <ellipse cx="65" cy="116" rx="8" ry="5" fill="#ffd4a0" opacity=".6"/>
+        <ellipse cx="75" cy="112" rx="8" ry="5" fill="#ffd4a0" opacity=".6" transform="rotate(15 75 112)"/>
+        <!-- Left leg -->
+        <line x1="53" y1="139" x2="53" y2="131" stroke="#c05808" stroke-width="3" stroke-linecap="round"/>
+        <!-- Left talons: back talon, two middle, front talon -->
+        <path d="M53,139 Q45,140 41,143" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M53,139 Q49,143 47,148" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M53,139 Q54,144 54,149" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M53,139 Q58,143 61,147" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <!-- Right leg -->
+        <line x1="77" y1="139" x2="77" y2="131" stroke="#c05808" stroke-width="3" stroke-linecap="round"/>
+        <!-- Right talons (mirrored) -->
+        <path d="M77,139 Q85,140 89,143" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M77,139 Q81,143 83,148" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M77,139 Q76,144 76,149" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <path d="M77,139 Q72,143 69,147" stroke="#c05808" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="response-area" id="responseArea"></div>
+
+  <div id="installBanner">
+    <span style="font-size:22px">🧬</span>
+    <div class="install-text">더 편리하게 사용하려면 홈 화면에 추가하세요</div>
+    <button class="install-btn" id="installBtn">설치</button>
+    <button class="install-close" id="installClose">×</button>
+  </div>
+</div>
+
+<script>
+// ── Clock ──────────────────────────────────────────────────────
+function updateClock(){
+  const n=new Date(), h=n.getHours()%12||12, m=String(n.getMinutes()).padStart(2,'0');
+  document.getElementById('statusTime').textContent=h+':'+m;
+}
+updateClock(); setInterval(updateClock,10000);
+
+// ── PWA ────────────────────────────────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js')
+    .then(r=>console.log('SW:',r.scope)).catch(e=>console.warn(e)));
+}
+const toast=document.getElementById('offlineToast');
+function showToast(msg,dur=3000){toast.textContent=msg;toast.style.display='block';setTimeout(()=>toast.style.display='none',dur);}
+window.addEventListener('offline',()=>showToast('📵 오프라인 — 앱은 계속 작동합니다!',4000));
+window.addEventListener('online', ()=>showToast('✅ 온라인 연결됨!',2500));
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBanner').style.display='flex';});
+document.getElementById('installBtn').onclick=()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('installBanner').style.display='none';});}};
+document.getElementById('installClose').onclick=()=>document.getElementById('installBanner').style.display='none';
+
+// ── Personalisation ────────────────────────────────────────────
+let userRole = 'patient'; // 'patient' or 'parent'
+function personalise(text){
+  if(userRole==='patient'){
+    return text
+      .replace(/\[본인 \/ 자녀의\]/g,'본인의')
+      .replace(/\[본인 \/ 자녀의\] 건강 상태/g,'본인의 건강 상태')
+      .replace(/\[본인 \/ 자녀의\] 주요 건강 상태/g,'본인의 주요 건강 상태')
+      .replace(/\[본인 \/ 가족이\]/g,'본인이');
+  } else {
+    return text
+      .replace(/\[본인 \/ 자녀의\]/g,'자녀의')
+      .replace(/\[본인 \/ 자녀의\] 건강 상태/g,'자녀의 건강 상태')
+      .replace(/\[본인 \/ 자녀의\] 주요 건강 상태/g,'자녀의 주요 건강 상태')
+      .replace(/\[본인 \/ 가족이\]/g,'가족이');
+  }
+}
+
+// ── Conversation data ──────────────────────────────────────────
+// steps[id] = { messages: [...], options: [...], progress, isQuiz }
+const steps = {
+
+  intro: {
+    progress: 5,
+    messages: [
+      "안녕하세요! 저는 에드나예요. 🦉",
+      "저는 전장 유전체 분석(WGS) 검사를 위한 유전체 팀 방문 준비를 도와드리러 왔어요.",
+      "이 세션은 짧고 간단해요. WGS가 무엇인지, 결과가 무엇을 의미하는지, 그리고 어떤 선택지가 있는지 설명해 드릴게요. 중간중간에 간단한 확인 질문도 몇 가지 있어요.",
+      "먼저 — 직접 검사를 받으시는 분인가요, 아니면 환자의 보호자이신가요?"
+    ],
+    options: [
+      {icon:'🧑‍⚕️', title:"저는 환자입니다",      sub:"", value:'patient', style:'primary',  next:'s1_wgs_what'},
+      {icon:'👪',    title:"저는 보호자입니다",     sub:"환자의 부모/보호자", value:'parent',  style:'primary',  next:'s1_wgs_what'},
+    ]
+  },
+
+  s1_wgs_what: {
+    progress: 12, badge:'info', badgeLabel:"WGS란 무엇인가요?",
+    messages: [
+      "전장 유전체 분석, 즉 WGS는 사람의 DNA에 있는 모든 유전자를 읽는 검사예요. 유전자는 모두 약 20,000개 정도 돼요.",
+      "유전자를 우리 몸을 위한 아주 긴 사용 설명서라고 생각해 보세요. WGS는 그 설명서 전체를 읽으면서 [본인 / 자녀의] 건강 상태를 일으킬 수 있는 '오타'를 찾아요.",
+      "DNA 검체는 소량의 혈액 채취나 간단한 뺨 면봉으로 얻을 수 있어요 — 어떤 방법이 더 편한지 선택하시면 돼요."
+    ],
+    options:[{icon:'👉', title:"이해했어요 — 다음은 무엇인가요?", value:'next', style:'primary', next:'s2_parents'}]
+  },
+
+  s2_parents: {
+    progress: 18, badge:'info', badgeLabel:"가족 검사",
+    messages: [
+      "가능하다면, 환자의 생물학적 부모님도 함께 검사를 받으시는 것이 좋아요.",
+      "왜냐하면 부모님의 DNA를 서로, 그리고 환자의 DNA와 비교하면 검사 기관에서 문제 유전자를 훨씬 쉽게 찾을 수 있기 때문이에요. 초안을 확인할 때 두 개의 참조 사본이 있는 것과 같아요.",
+      "부모님도 환자와 동일하게 혈액 채취나 뺨 면봉 중 원하는 방법으로 검체를 제공하시면 돼요."
+    ],
+    options:[{icon:'👉', title:"이해했어요 — 계속할게요", value:'next', style:'primary', next:'quiz1'}]
+  },
+
+  quiz1: {
+    progress: 20, isQuiz:true, badge:'quiz', badgeLabel:"간단 확인 ✏️",
+    messages:["부모님도 함께 검사를 받으면 좋은 이유는 무엇인가요?"],
+    options:[
+      {icon:'🔘', title:"부모님도 항상 같은 질환을 갖고 있기 때문에",               value:'wrong1',  style:'quiz-opt', next:'quiz1_wrong'},
+      {icon:'🔘', title:"DNA를 비교해서 손상된 유전자를 더 쉽게 찾을 수 있기 때문에", value:'correct', style:'quiz-opt', next:'quiz1_correct'},
+      {icon:'🔘', title:"부모님이 건강한지 확인하기 위해",                          value:'wrong2',  style:'quiz-opt', next:'quiz1_wrong'},
+    ]
+  },
+
+  quiz1_correct: {
+    progress: 20, badge:'good', badgeLabel:"정답! ✅",
+    messages:[
+      "맞아요! 부모님의 DNA를 비교하면 검사 기관에 기준점이 생겨서 손상된 유전자를 찾기가 훨씬 쉬워져요.",
+      "이제 검사 결과가 어떻게 나올 수 있는지 알아볼게요."
+    ],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s3_results'}]
+  },
+
+  quiz1_wrong: {
+    progress: 20, badge:'warn', badgeLabel:"아쉽게도 틀렸어요…",
+    messages:[
+      "아쉽게도 틀렸어요. 부모님도 함께 검사를 받는 이유는, 서로의 DNA와 환자의 DNA를 비교했을 때 건강 문제를 일으키는 손상된 유전자를 훨씬 정확하게 찾을 수 있기 때문이에요.",
+      "괜찮아요 — 이제 결과가 어떻게 나올 수 있는지 알아볼게요."
+    ],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s3_results'}]
+  },
+
+  s3_results: {
+    progress: 28, badge:'info', badgeLabel:"결과의 종류",
+    messages:[
+      "WGS 결과는 세 가지 중 하나로 나와요:",
+      "✅ 양성(POSITIVE) — [본인 / 자녀의] 건강 상태를 일으킬 가능성이 높은 손상된 유전자를 찾았어요. 유전체 팀이 가장 기대하는 결과예요.",
+      "🔵 음성(NEGATIVE) — [본인 / 자녀의] 건강 상태를 설명할 수 있는 손상된 유전자를 찾지 못했어요. 이것이 유전적 질환이 아니라는 뜻이 아니라, 현재 기술로는 아직 찾지 못했다는 의미예요.",
+      "🔶 불확실(UNCERTAIN) — 때로는 '불확실한 의미의 변이(VUS)'를 발견하기도 해요. 이는 조금 특이한 부분을 발견했지만, 아직 그것이 중요한지 알 수 없다는 뜻이에요.",
+      "VUS는 주로 의료 팀과 검사 기관이 계속 관찰할 수 있도록 표시해 두는 것이에요. 대부분의 경우 걱정할 필요가 없고, 진단 결과가 아니에요.",
+      "한 가지 더: 현재로서는 양성 결과를 받는 환자가 소수예요. 음성 결과는 흔한 일이며, 검사가 실패했다는 뜻이 아니에요."
+    ],
+    options:[{icon:'👉', title:"이해했어요 — 계속할게요", value:'next', style:'primary', next:'quiz2'}]
+  },
+
+  quiz2: {
+    progress: 32, isQuiz:true, badge:'quiz', badgeLabel:"간단 확인 ✏️",
+    messages:["VUS를 가장 잘 설명하는 것은 무엇인가요?"],
+    options:[
+      {icon:'🔘', title:"유전 질환의 확정 진단",                           value:'wrong1',  style:'quiz-opt', next:'quiz2_wrong'},
+      {icon:'🔘', title:"검사에서 아무것도 발견하지 못했다는 증거",         value:'wrong2',  style:'quiz-opt', next:'quiz2_wrong'},
+      {icon:'🔘', title:"관찰 중인 DNA의 약간의 차이 — 진단 결과가 아님",  value:'correct', style:'quiz-opt', next:'quiz2_correct'},
+    ]
+  },
+
+  quiz2_correct: {
+    progress: 32, badge:'good', badgeLabel:"정답! ✅",
+    messages:["정확해요. VUS는 조금 특이한 부분으로 관찰하는 것이지, 진단 결과가 아니고 대개 걱정할 필요가 없어요."],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s4_benefits'}]
+  },
+
+  quiz2_wrong: {
+    progress: 32, badge:'warn', badgeLabel:"아쉽게도 틀렸어요…",
+    messages:["아쉽게도 틀렸어요. VUS는 팀이 계속 관찰할 수 있도록 표시해 두는 DNA의 약간의 차이예요 — 진단 결과가 아니며, 대부분의 경우 걱정할 필요가 없어요."],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s4_benefits'}]
+  },
+
+  s4_benefits: {
+    progress: 42, badge:'info', badgeLabel:"양성 결과의 장점",
+    messages:[
+      "검사 결과가 양성으로 나오면 — 즉 손상된 유전자를 찾으면 — 몇 가지 중요한 장점이 있어요.",
+      "💊 더 나은 치료: 유전적 원인을 알면 더 정확한 치료 방향을 잡을 수 있어요. 경우에 따라서는 확정된 유전 진단이 있는 환자만 받을 수 있는 실험적 치료에 접근할 수도 있어요.",
+      "👪 가족 계획: 같은 질환을 가진 아이가 태어날 가능성이 있는지 부모님이 더 잘 이해하게 돼요. 유전 상담사가 이 부분을 자세히 설명해 드릴 수 있어요.",
+      "🌳 더 넓은 가족: 확정 진단은 먼 사촌을 포함한 다른 가족들이 같은 질환을 앓고 있는 이유를 설명해 줄 수도 있어요. 많은 사람들에게 오랜 의문이 한꺼번에 해결될 수 있어요."
+    ],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s5_risks'}]
+  },
+
+  s5_risks: {
+    progress: 52, badge:'info', badgeLabel:"법적 고려 사항",
+    messages:[
+      "검사 전에 알아두어야 할 법적 위험이 한 가지 있어요.",
+      "🛡️ 미국에서는 GINA — 유전 정보 차별 금지법 — 이라는 연방법이 직장과 건강 보험에서 유전자 검사 결과에 따른 차별로부터 환자를 보호해요.",
+      "⚠️ 하지만 GINA가 모든 종류의 보험을 커버하지는 않아요. 생명보험, 장애보험, 장기요양보험은 보호되지 않아요. 이 보험들의 보험사는 합법적으로 유전자 검사 결과를 요청할 수 있어요.",
+      "이 점을 알고 계시는 게 좋지만, 검사를 진행할지는 결국 본인의 결정이에요. 많은 가족들이 잠재적 이점이 이 위험보다 크다고 판단해요."
+    ],
+    options:[{icon:'👉', title:"이해했어요 — 계속할게요", value:'next', style:'primary', next:'quiz3'}]
+  },
+
+  quiz3: {
+    progress: 56, isQuiz:true, badge:'quiz', badgeLabel:"간단 확인 ✏️",
+    messages:["GINA의 보호를 받지 못해 유전자 검사 결과가 사용될 수 있는 보험은 무엇인가요?"],
+    options:[
+      {icon:'🔘', title:"건강 보험",                      value:'wrong1',  style:'quiz-opt', next:'quiz3_wrong'},
+      {icon:'🔘', title:"생명보험, 장애보험, 장기요양보험", value:'correct', style:'quiz-opt', next:'quiz3_correct'},
+      {icon:'🔘', title:"직장 고용",                      value:'wrong2',  style:'quiz-opt', next:'quiz3_wrong'},
+    ]
+  },
+
+  quiz3_correct: {
+    progress: 56, badge:'good', badgeLabel:"정답! ✅",
+    messages:["정답이에요. 건강 보험과 직장은 GINA의 보호를 받지만, 생명보험, 장애보험, 장기요양보험은 보호받지 못해요."],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s6_secondary'}]
+  },
+
+  quiz3_wrong: {
+    progress: 56, badge:'warn', badgeLabel:"아쉽게도 틀렸어요…",
+    messages:["아쉽게도 틀렸어요. GINA는 직장과 건강 보험을 보호하지만, 생명보험, 장애보험, 장기요양보험은 보호하지 않아요."],
+    options:[{icon:'👉', title:"계속하기", value:'next', style:'primary', next:'s6_secondary'}]
+  },
+
+  s6_secondary: {
+    progress: 66, badge:'info', badgeLabel:"이차 소견",
+    messages:[
+      "WGS는 모든 유전자를 읽기 때문에, [본인 / 자녀의] 주요 건강 상태 외에 다른 부분도 살펴볼 수 있는 선택이 있어요.",
+      "🧬 이것을 이차 소견이라고 해요 — 주로 심장 및 혈관 질환, 암 위험, 대사 질환과 관련된 수십 개의 특정 유전자를 확인하는 거예요. 이 유전자들에서 문제를 발견하면 실질적인 도움이 될 수 있어요: 이 위험을 관리하고 건강 결과를 개선하는 검증된 방법들이 있거든요.",
+      "이차 소견은 환자, 그리고/또는 한쪽 또는 양쪽 부모님 각각에 대해 보고받을 수 있어요 — 검체를 제공하는 각 사람마다 개별적으로 선택할 수 있어요.",
+      "실제로 양성 이차 소견을 받는 사람은 소수에 불과해요 — 많아야 몇 퍼센트 정도예요. 대부분의 경우 추가로 발견되는 것이 없어요.",
+      "선택은 전적으로 본인의 것이에요. 이차 소견 보고를 원하시면, 팀이 물어볼 때 말씀해 주세요. [본인 / 자녀의] 주요 건강 상태에만 집중하셔도 전혀 괜찮아요 — 부담을 드리려는 것이 아니에요."
+    ],
+    options:[{icon:'👉', title:"마지막 확인으로 넘어가기", value:'next', style:'primary', next:'quiz4'}]
+  },
+
+  quiz4: {
+    progress: 80, isQuiz:true, badge:'quiz', badgeLabel:"마지막 확인 ✏️",
+    messages:["이차 소견을 가장 잘 설명하는 것은 무엇인가요?"],
+    options:[
+      {icon:'🔘', title:"주요 결과 — 질환이 발견되었는지 여부",                value:'wrong1',  style:'quiz-opt', next:'quiz4_wrong'},
+      {icon:'🔘', title:"다른 의사의 두 번째 의견",                            value:'wrong2',  style:'quiz-opt', next:'quiz4_wrong'},
+      {icon:'🔘', title:"장기적 건강에 영향을 줄 수 있는 다른 유전자를 보는 선택적 검사", value:'correct', style:'quiz-opt', next:'quiz4_correct'},
+    ]
+  },
+
+  quiz4_correct: {
+    progress: 80, badge:'good', badgeLabel:"정답! ✅",
+    messages:["바로 맞아요! 이차 소견은 선택적 추가 사항으로 — 분석이 이미 진행 중인 동안 다른 건강 위험에 대해 알 수 있는 기회예요."],
+    options:[{icon:'👉', title:"거의 다 왔어요!", value:'next', style:'primary', next:'s7_closing'}]
+  },
+
+  quiz4_wrong: {
+    progress: 80, badge:'warn', badgeLabel:"아쉽게도 틀렸어요…",
+    messages:["아쉽게도 틀렸어요. 이차 소견은 주요 질환과 관련 없는 별도의 유전자들을 선택적으로 살펴보는 것이에요 — 위험을 미리 알면 건강 결과를 개선하는 데 도움이 될 수 있어요."],
+    options:[{icon:'👉', title:"거의 다 왔어요!", value:'next', style:'primary', next:'s7_closing'}]
+  },
+
+  s7_closing: {
+    progress: 100, badge:'info', badgeLabel:"모두 완료! 🎉",
+    messages:[
+      "오늘 나눌 내용은 여기까지예요.",
+      "이 세션의 목적은 본인과 가족이 유전체 팀 방문을 잘 준비할 수 있도록, 검사 전 유전 상담 대화가 최대한 유용하게 이루어지도록 돕는 거예요.",
+      "팀을 만나면 모든 것을 더 자세히 설명해 드리고 질문에 답해 드릴 거예요. 오늘 당장 결정을 내리실 필요는 없어요.",
+      "에드나는 [본인 / 가족이] 찾고 있는 답을 얻으시길 바라요. 방문 잘 다녀오세요! 💙"
+    ],
+    options:[
+      {icon:'🙏', title:"감사해요, 에드나!",  value:'done',    style:'primary',   next:'end'},
+    ]
+  },
+
+  end: {
+    progress: 100,
+    messages:["천만에요. 건강하게 지내세요! 🦉✨"],
+    options:[
+      {icon:'🔄', title:"처음부터 다시", value:'restart', style:'secondary', next:'intro'},
+    ]
+  }
+};
+
+// ── Engine// ── Engine ─────────────────────────────────────────────────────
+const chatArea    = document.getElementById('chatArea');
+const respArea    = document.getElementById('responseArea');
+const progressBar = document.getElementById('progressBar');
+
+function owlAvatar(){
+  return `<div class="avatar">
+    <svg viewBox="0 0 36 36" width="36" height="36">
+      <!-- Ear tufts -->
+      <polygon points="12,10 10,4 15,9"  fill="#f97316"/>
+      <polygon points="24,10 26,4 21,9"  fill="#f97316"/>
+      <!-- Head -->
+      <circle cx="18" cy="17" r="13" fill="#f97316"/>
+      <!-- Facial disc -->
+      <ellipse cx="18" cy="19" rx="10" ry="9" fill="#ffe0c0"/>
+      <!-- Eyes -->
+      <circle cx="13" cy="16" r="4" fill="#1a3a5c"/>
+      <circle cx="23" cy="16" r="4" fill="#1a3a5c"/>
+      <circle cx="13" cy="16" r="2.8" fill="#3cb8e0"/>
+      <circle cx="23" cy="16" r="2.8" fill="#3cb8e0"/>
+      <circle cx="13" cy="16" r="1.5" fill="#0d1f35"/>
+      <circle cx="23" cy="16" r="1.5" fill="#0d1f35"/>
+      <circle cx="14" cy="15" r="0.9" fill="white" opacity=".9"/>
+      <circle cx="24" cy="15" r="0.9" fill="white" opacity=".9"/>
+      <!-- Beak: inverted triangle, point down -->
+      <polygon points="15,20 21,20 18,25" fill="#e07010"/>
+    </svg></div>`;
+}
+
+function scrollBottom(){
+  setTimeout(()=>{ chatArea.scrollTop=chatArea.scrollHeight; },60);
+}
+
+function showTyping(callback, delay){
+  const row=document.createElement('div');
+  row.className='typing-row';
+  row.innerHTML=`${owlAvatar()}<div class="typing-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;
+  chatArea.appendChild(row);
+  scrollBottom();
+  setTimeout(()=>{ row.remove(); callback(); }, delay);
+}
+
+function addBubble(type, text, extraClass=''){
+  const row=document.createElement('div');
+  const isEdna=(type==='edna'||type==='quiz');
+  row.className=`bubble-row ${isEdna?'edna-row':'patient-row'}`;
+  const bubClass= type==='quiz' ? 'quiz-bubble' : (isEdna ? 'edna-bubble' : 'patient-bubble');
+  row.innerHTML=`${isEdna ? owlAvatar() : ''}
+    <div class="bubble ${bubClass} ${extraClass}">${personalise(text).replace(/\n/g,'<br>')}</div>`;
+  chatArea.appendChild(row);
+  scrollBottom();
+}
+
+function addBadge(badgeClass, label){
+  const d=document.createElement('div');
+  d.style.textAlign='center';
+  d.style.animation='slideUp .3s ease forwards';
+  d.style.opacity='0';
+  d.innerHTML=`<span class="section-badge ${badgeClass}">${label}</span>`;
+  chatArea.appendChild(d);
+  scrollBottom();
+}
+
+function showOptions(step){
+  respArea.innerHTML='';
+  step.options.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className=`resp-btn ${opt.style}`;
+    btn.style.animationDelay=`${i*0.07}s`;
+    btn.style.animation='slideUp .32s ease forwards';
+    btn.style.opacity='0';
+    btn.innerHTML=`<span class="btn-icon">${opt.icon||'👉'}</span>
+      <div class="btn-text"><div class="btn-title">${opt.title}</div>${opt.sub?`<div class="btn-sub">${opt.sub}</div>`:''}</div>`;
+    btn.onclick=()=>handleChoice(opt, step);
+    respArea.appendChild(btn);
+  });
+}
+
+function handleChoice(opt, step){
+  respArea.querySelectorAll('.resp-btn').forEach(b=>{b.disabled=true;b.style.opacity='.4';});
+  addBubble('patient', opt.title);
+  // If intro step, capture role
+  if(opt.value==='patient'||opt.value==='parent') userRole=opt.value;
+  if(opt.next) setTimeout(()=>loadStep(opt.next), 450);
+}
+
+async function loadStep(stepId){
+  const step=steps[stepId];
+  if(!step) return;
+
+  progressBar.style.width=(step.progress||5)+'%';
+  respArea.innerHTML='';
+
+  // Badge
+  if(step.badge && step.badgeLabel){
+    const cls={info:'badge-info',quiz:'badge-quiz',good:'badge-good',warn:'badge-warn'}[step.badge]||'badge-info';
+    addBadge(cls, step.badgeLabel);
+  }
+
+  // Messages
+  for(let i=0;i<step.messages.length;i++){
+    await new Promise(resolve=>{
+      const msg=step.messages[i];
+      const delay=600 + Math.min(msg.length*7, 1800);
+      showTyping(()=>{ addBubble(step.isQuiz?'quiz':'edna', msg); resolve(); }, delay);
+    });
+  }
+
+  showOptions(step);
+}
+
+// Start
+loadStep('intro');
+</script>
+</body>
+</html>
